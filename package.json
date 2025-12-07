@@ -1,0 +1,29 @@
+{
+  "name": "promptgenerator12columns",
+  "version": "1.0.0",
+  "description": "A fast and flexible random prompt generator with 12 columns (Empty / Pre-filled SFW / Pre-filled NSFW) Pre filled with text so that you can get started right away. Supports comma or newline output and always adds quality tags.",
+  "author": "DemonNCoding",
+  "license": "MIT",
+  "repository": "https://github.com/DemonNCoding/PromptGenerator12Columns.git",
+  "keywords": [
+    "prompt",
+    "comfyui",
+    "generator",
+    "random",
+    "twelve columns",
+    "sfw",
+    "nsfw",
+    "prompt builder"
+  ],
+  "comfyui": {
+    "nodes": [
+      "prompt_generator_12_columns_empty",
+      "prompt_generator_12_columns_prefilled",
+      "prompt_generator_12_columns_prefilledNSFW"
+    ]
+  }
+}
+
+
+
+
