@@ -28,7 +28,7 @@ Documentation = "https://github.com/DemonNCoding/PromptGenerator12Columns/wiki"
 "Bug Tracker" = "https://github.com/DemonNCoding/PromptGenerator12Columns/issues"
 
 [tool.comfy]
-PublisherId = ""
+PublisherId = "demonncoding"
 DisplayName = "PromptGenerator12Columns"
 Icon = ""
 includes = [] 
