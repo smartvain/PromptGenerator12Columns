@@ -5,7 +5,8 @@ class PromptGenerator12Columns_PrefilledNSFW:
 
 
     PRESET_DATA = {
-        1: """solo female
+        1: """# ━━━ Subject ━━━
+solo female
 beautiful young woman
 stunning young woman
 gorgeous woman in her 20s
@@ -113,7 +114,8 @@ heartbroken woman
 freshly divorced woman
 woman next door
 mysterious stranger""",                     # Subject
-        2: """long flowing hair
+        2: """# ━━━ Hair Type ━━━
+long flowing hair
 waist-length straight hair
 hip-length silky hair
 long layered hair
@@ -211,7 +213,8 @@ wind-swept strands
 soft ombre hair
 caramel highlights
 dark roots with lighter ends""",            # Hair Type
-        3: """platinum blonde
+        3: """# ━━━ Hair Color ━━━
+platinum blonde
 icy platinum blonde
 scandinavian blonde
 ash blonde
@@ -279,7 +282,8 @@ soft ash brown with cool highlights
 light auburn with golden streaks
 jet black with subtle blue sheen
 deep espresso with warm undertones""",             # Hair Color
-        4: """piercing ice-blue eyes
+        4: """# ━━━ Eyes ━━━
+piercing ice-blue eyes
 deep sapphire blue eyes
 bright sky blue eyes
 stormy gray-blue eyes
@@ -337,7 +341,8 @@ red-rimmed eyes
 pale gray-blue eyes
 golden-yellow eyes
 very dark red-brown eyes""",                       # Eyes
-        5: """perfect hourglass figure
+        5: """# ━━━ Body Type ━━━
+perfect hourglass figure
 extreme hourglass
 slim thick
 voluptuous bombshell
@@ -455,7 +460,8 @@ vacuum-sealed waist
 anatomically impossible curves
 latex-skin tight
 hyper-realistic 8k skin detail""",                           # Body Type
-        6: """flat chested
+        6: """# ━━━ Breasts ━━━
+flat chested
 tiny perky breasts
 small A cup breasts
 small B cup breasts
@@ -586,7 +592,8 @@ breasts swollen from pregnancy
 breasts swollen from arousal
 hypersensitive breasts
 numb overstimulated breasts""",                             # Breasts
-        7: """flawless porcelain skin
+        7: """# ━━━ Skin & Marks ━━━
+flawless porcelain skin
 smooth pale skin
 fair skin with rosy undertones
 lightly tanned golden skin
@@ -675,7 +682,8 @@ veins visible on breasts
 veins on hands and forearms
 slight cellulite on thighs
 natural body texture""",                          # Skin and Marks
-        8: """ahegao tongue out
+        8: """# ━━━ Expression ━━━
+ahegao tongue out
 blushing intensely
 lustful bedroom eyes
 innocent but horny
@@ -764,7 +772,8 @@ face of overstimulation
 face of pure happiness
 face of loving devotion
 face of hateful lust""",                           # Expression
-        9: """completely naked
+        9: """# ━━━ NSFW Action ━━━
+completely naked
 fully nude
 spreading legs wide
 spreading pussy
@@ -887,7 +896,8 @@ completely submissive
 completely dominant
 ecstatic expression
 pleasure overload""",                              # NSFW Action
-        10: """completely naked
+        10: """# ━━━ Clothing ━━━
+completely naked
 fully nude
 micro bikini
 string bikini
@@ -991,7 +1001,8 @@ nothing but a cape
 nothing but a veil
 nothing but a jacket draped open
 nothing but a coat wide open""",                              # Clothing
-        11: """golden hour beach sunset
+        11: """# ━━━ Lighting ━━━
+golden hour beach sunset
 soft morning bedroom light
 warm golden bedroom sunrise
 luxury penthouse night city view
@@ -1113,7 +1124,8 @@ hellfire dungeon
 ancient mayan temple
 magical floating waterfall
 abandoned lunar base""",                             # Lighting
-        12: """masterpiece
+        12: """# ━━━ Quality ━━━
+masterpiece
 best quality
 ultra detailed
 8k
@@ -1227,22 +1239,28 @@ phone quality""",      # Quality
     ]
 
 
+    COLUMN_NAMES = [
+        "Subject", "Hair_Type", "Hair_Color", "Eyes", "Body_Type",
+        "Breasts", "Skin_and_Marks", "Expression", "NSFW_Action", "Clothing",
+        "Lighting", "Quality"
+    ]
+
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "Column_1": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[1]}),
-                "Column_2": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[2]}),
-                "Column_3": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[3]}),
-                "Column_4": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[4]}),
-                "Column_5": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[5]}),
-                "Column_6": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[6]}),
-                "Column_7": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[7]}),
-                "Column_8": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[8]}),
-                "Column_9": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[9]}),
-                "Column_10": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[10]}),
-                "Column_11": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[11]}),
-                "Column_12": ("STRING", {"multiline": True, "default": cls.PRESET_DATA[12]}),
+                cls.COLUMN_NAMES[0]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[1]}),
+                cls.COLUMN_NAMES[1]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[2]}),
+                cls.COLUMN_NAMES[2]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[3]}),
+                cls.COLUMN_NAMES[3]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[4]}),
+                cls.COLUMN_NAMES[4]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[5]}),
+                cls.COLUMN_NAMES[5]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[6]}),
+                cls.COLUMN_NAMES[6]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[7]}),
+                cls.COLUMN_NAMES[7]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[8]}),
+                cls.COLUMN_NAMES[8]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[9]}),
+                cls.COLUMN_NAMES[9]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[10]}),
+                cls.COLUMN_NAMES[10]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[11]}),
+                cls.COLUMN_NAMES[11]: ("STRING", {"multiline": True, "default": cls.PRESET_DATA[12]}),
                 "always_add": ("STRING", {"multiline": True, "default": 
                         "intricate details\ncinematic lighting\nvibrant colors\nmasterpiece\nbest quality\nultra-detailed\n8k resolution\nsharp focus\nperfect anatomy"
                 }),
@@ -1274,7 +1292,7 @@ phone quality""",      # Quality
         seed = random.randint(0, 0xffffffffffffffff)
         random.seed(seed)
 
-        cols            = [kwargs[f"Column_{i}"] for i in range(1, 13)]
+        cols            = [kwargs[name] for name in self.COLUMN_NAMES]
         use_commas      = kwargs.get("use_commas", True)
         add_titles      = kwargs.get("add_titles", False)
         include_always  = kwargs.get("include_always", True)
