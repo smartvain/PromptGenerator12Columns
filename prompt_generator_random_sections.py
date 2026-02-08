@@ -151,7 +151,11 @@ face of total submission"""
             parts.append(prompt_text)
 
         for name, lines in sections:
-            pick = random.choice(lines)
+            pinned = [l[1:] for l in lines if l.startswith('$')]
+            if pinned:
+                pick = pinned[0]
+            else:
+                pick = random.choice(lines)
             parts.append(pick)
 
         result = sep.join(parts)
@@ -161,7 +165,9 @@ face of total submission"""
             idx = 1 if prompt_text else 0
             for name, _ in sections:
                 if idx < len(parts):
-                    picks.append(f"  [{name}] → {parts[idx]}")
+                    pinned = any(l.startswith('$') for l in lines)
+                    mark = " (pinned)" if pinned else ""
+                    picks.append(f"  [{name}] → {parts[idx]}{mark}")
                     idx += 1
             picks_str = "\n".join(picks)
             print(f"\n[Random Sections Generator] Seed: {seed}\n{picks_str}\n→ {result}\n{'─' * 80}")
