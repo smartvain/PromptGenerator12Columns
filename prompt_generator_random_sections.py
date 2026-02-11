@@ -152,10 +152,13 @@ face of total submission"""
 
         for name, lines in sections:
             pinned = [l[1:] for l in lines if l.startswith('$')]
+            candidates = [l for l in lines if not l.startswith('$') and not l.startswith('!')]
             if pinned:
                 pick = pinned[0]
+            elif candidates:
+                pick = random.choice(candidates)
             else:
-                pick = random.choice(lines)
+                continue
             parts.append(pick)
 
         result = sep.join(parts)
@@ -163,12 +166,18 @@ face of total submission"""
         if self.DEBUG:
             picks = []
             idx = 1 if prompt_text else 0
-            for name, _ in sections:
-                if idx < len(parts):
-                    pinned = any(l.startswith('$') for l in lines)
-                    mark = " (pinned)" if pinned else ""
-                    picks.append(f"  [{name}] → {parts[idx]}{mark}")
-                    idx += 1
+            for name, lines in sections:
+                excluded = [l[1:] for l in lines if l.startswith('!')]
+                has_pinned = any(l.startswith('$') for l in lines)
+                candidates = [l for l in lines if not l.startswith('$') and not l.startswith('!')]
+                if has_pinned or candidates:
+                    if idx < len(parts):
+                        mark = " (pinned)" if has_pinned else ""
+                        excluded_str = f" | excluded: {', '.join(excluded)}" if excluded else ""
+                        picks.append(f"  [{name}] → {parts[idx]}{mark}{excluded_str}")
+                        idx += 1
+                else:
+                    picks.append(f"  [{name}] → (all excluded, skipped)")
             picks_str = "\n".join(picks)
             print(f"\n[Random Sections Generator] Seed: {seed}\n{picks_str}\n→ {result}\n{'─' * 80}")
 
