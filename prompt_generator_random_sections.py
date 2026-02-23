@@ -91,6 +91,8 @@ face of total submission"""
             },
             "optional": {
                 "use_commas": ("BOOLEAN", {"default": True, "label_on": "Use Commas", "label_off": "New Lines"}),
+                "pin_prefix": ("STRING", {"default": "$", "tooltip": "行頭にこの文字を付けると、そのセクションは常にその値を使用します（固定）"}),
+                "exclude_prefix": ("STRING", {"default": "!", "tooltip": "行頭にこの文字を付けると、そのセクションの候補から除外されます"}),
             }
         }
 
@@ -141,6 +143,8 @@ face of total submission"""
         prompt_text = kwargs.get("prompt", "").strip()
         sections_text = kwargs.get("random_sections", "")
         use_commas = kwargs.get("use_commas", True)
+        pin = kwargs.get("pin_prefix", "$")
+        exc = kwargs.get("exclude_prefix", "!")
 
         sections = self._parse_sections(sections_text)
 
@@ -151,10 +155,10 @@ face of total submission"""
             parts.append(prompt_text)
 
         for name, lines in sections:
-            pinned = [l[1:] for l in lines if l.startswith('$')]
-            candidates = [l for l in lines if not l.startswith('$') and not l.startswith('!')]
+            pinned = [l[len(pin):] for l in lines if l.startswith(pin)]
+            candidates = [l for l in lines if not l.startswith(pin) and not l.startswith(exc)]
             if pinned:
-                pick = pinned[0]
+                pick = random.choice(pinned)
             elif candidates:
                 pick = random.choice(candidates)
             else:
@@ -167,9 +171,9 @@ face of total submission"""
             picks = []
             idx = 1 if prompt_text else 0
             for name, lines in sections:
-                excluded = [l[1:] for l in lines if l.startswith('!')]
-                has_pinned = any(l.startswith('$') for l in lines)
-                candidates = [l for l in lines if not l.startswith('$') and not l.startswith('!')]
+                excluded = [l[len(exc):] for l in lines if l.startswith(exc)]
+                has_pinned = any(l.startswith(pin) for l in lines)
+                candidates = [l for l in lines if not l.startswith(pin) and not l.startswith(exc)]
                 if has_pinned or candidates:
                     if idx < len(parts):
                         mark = " (pinned)" if has_pinned else ""
